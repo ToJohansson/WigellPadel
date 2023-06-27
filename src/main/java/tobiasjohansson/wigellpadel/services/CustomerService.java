@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
 import tobiasjohansson.wigellpadel.models.Booking;
+import tobiasjohansson.wigellpadel.models.Court;
 import tobiasjohansson.wigellpadel.models.Customer;
 import tobiasjohansson.wigellpadel.models.Slot;
 import tobiasjohansson.wigellpadel.repositories.CustomerRepository;
@@ -64,9 +65,20 @@ public class CustomerService {
 
         if (booking.getCustomerIdHolder() > 0) {
 
+//            booking.addCourt(courtService.getCourtById(booking.getCourtIdHolder()));
+//            int lastIndex = booking.getCourt().size() - 1; // get the newest made booking
+//            Slot slotToChange = booking.getCourt().get(lastIndex).getSlots().get((int) booking.getSlotIndexHolder() - 1);
+//
+//            slotToChange.setAvailable(false);
+//            slotToChange.setStatus("Booked");
+
+            // TODO NEW CHANGE TO THE BOOKING OVER HERE!!!
             booking.addCourt(courtService.getCourtById(booking.getCourtIdHolder()));
-            int lastIndex = booking.getCourt().size() - 1; // get the newest made booking
-            Slot slotToChange = booking.getCourt().get(lastIndex).getSlots().get((int) booking.getSlotIndexHolder() - 1);
+            Court lastCourt = null;
+            for (Court element : booking.getCourts()) {
+                lastCourt = element;
+            }
+            Slot slotToChange = lastCourt.getSlots().get((int) booking.getSlotIndexHolder() - 1);
 
             slotToChange.setAvailable(false);
             slotToChange.setStatus("Booked");

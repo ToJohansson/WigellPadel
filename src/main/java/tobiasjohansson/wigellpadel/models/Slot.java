@@ -13,6 +13,7 @@ public class Slot {
     private long slotId;
 
     private String status;
+    @JsonIgnore
     private boolean available;
     private double price;
     private String timeSlot;

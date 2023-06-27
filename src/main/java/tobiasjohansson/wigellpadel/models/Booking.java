@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "BOOKINGS")
@@ -23,9 +21,14 @@ public class Booking {
     @Column(name = "DATE_OF_BOOKING")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date dateOfBooking;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Court> court = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Court> court = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "booking_court",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "court_id"))
+    private Set<Court> courts = new HashSet<>();
     @ManyToOne()
     private Customer customerInformation;
     @Transient
@@ -93,15 +96,26 @@ public class Booking {
         return slotIndexHolder;
     }
 
-    public void addCourt(Court court){
-        this.court.add(court);
-    }
-    public List<Court> getCourt() {
-        return court;
+//    public void addCourt(Court court){
+//        this.court.add(court);
+//    }
+//    public List<Court> getCourt() {
+//        return court;
+//    }
+//
+//    public void setCourt(List<Court> court) {
+//        this.court = court;
+//    }
+    public void addCourt(Court court) {
+        courts.add(court);
     }
 
-    public void setCourt(List<Court> court) {
-        this.court = court;
+    public Set<Court> getCourts() {
+        return courts;
+    }
+
+    public void setCourts(Set<Court> courts) {
+        this.courts = courts;
     }
 
     public void setSlotIndexHolder(int slotIndexHolder) {
