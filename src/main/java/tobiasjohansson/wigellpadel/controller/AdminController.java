@@ -28,8 +28,6 @@ public class AdminController {
      */
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private BookingService bookingService;
 
     public AdminController(){}
 
@@ -39,6 +37,6 @@ public class AdminController {
     }
     @PostMapping("/register")
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
-        return new ResponseEntity<Customer>(customerService.saveCustomer(customer), HttpStatus.OK);
+        return new ResponseEntity<Customer>(customerService.saveCustomer(customer), HttpStatus.CREATED);
     }
 }

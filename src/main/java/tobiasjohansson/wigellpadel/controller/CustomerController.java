@@ -20,6 +20,8 @@ public class CustomerController {
     private CourtService courtService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private BookingService bookingService;
 
     public CustomerController(){
     }
@@ -33,7 +35,7 @@ public class CustomerController {
         return customerService.getMyBookings(id);
     }
     @PostMapping("/bookings")
-    public ResponseEntity<Booking> bookSlot(@RequestBody Booking booking){
-        return new ResponseEntity<Booking>(customerService.saveBooking(booking), HttpStatus.CREATED);
+    public ResponseEntity<String> bookSlot(@RequestBody Booking booking){
+        return new ResponseEntity<String>(bookingService.saveBooking(booking), HttpStatus.OK);
     }
 }

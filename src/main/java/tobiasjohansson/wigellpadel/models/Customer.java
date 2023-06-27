@@ -95,4 +95,7 @@ public class Customer {
     public void setHolderForId(long addressIdHolder) {
         this.holderForId = addressIdHolder;
     }
+    public void addBookingList(Booking booking){
+        this.myBookingList.add(booking);
+    }
 }
