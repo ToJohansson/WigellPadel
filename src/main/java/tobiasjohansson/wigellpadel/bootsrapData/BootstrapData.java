@@ -61,8 +61,8 @@ public class BootstrapData implements CommandLineRunner {
          * ***********************************
          * BOOKING
          */
-        Booking booking1 = new Booking(timeSlot1,customer1);
-        Booking booking2 = new Booking(timeSlot2,customer1);
+        Booking booking1 = new Booking(timeSlot1);
+        Booking booking2 = new Booking(timeSlot2);
         bookingRepository.save(booking1);
         bookingRepository.save(booking2);
         customer1.addBookingList(booking1);

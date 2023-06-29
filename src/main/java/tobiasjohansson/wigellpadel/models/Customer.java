@@ -22,7 +22,7 @@ public class Customer {
     private String username;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Booking> myBookingList = new ArrayList<>();
     @ManyToOne()
     private Address address;

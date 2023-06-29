@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tobiasjohansson.wigellpadel.models.Booking;
-import tobiasjohansson.wigellpadel.models.Customer;
 import tobiasjohansson.wigellpadel.models.TimeSlot;
-import tobiasjohansson.wigellpadel.repositories.CustomerRepository;
-import tobiasjohansson.wigellpadel.services.BookingService;
 import tobiasjohansson.wigellpadel.services.CustomerService;
 import tobiasjohansson.wigellpadel.services.TimeSlotService;
 
@@ -22,8 +19,6 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private BookingService bookingService;
     @Autowired
     private TimeSlotService timeSlotService;
 
@@ -44,7 +39,7 @@ public class CustomerController {
         long timeId = requestBody.get("timeId");
         long customerId = requestBody.get("customerId");
 
-        return new ResponseEntity<String>(bookingService.saveBooking(timeId, customerId), HttpStatus.OK);
+        return new ResponseEntity<String>(customerService.saveBooking(timeId, customerId), HttpStatus.OK);
     }
 
 }

@@ -14,10 +14,7 @@ import java.util.List;
 public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
-    @Autowired
-    private TimeSlotService timeSlotService;
-    @Autowired
-    private CustomerService customerService;
+
     public BookingService() {
     }
 
@@ -26,23 +23,11 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
-    // SAVE
-//    public void saveBooking(Booking booking) {
-//        bookingRepository.save(booking);
-//    }
-    public String saveBooking(long timeId, long customerId) {
-        TimeSlot timeSlot = timeSlotService.getTimeSlotById(timeId);
-
-        Customer customer = customerService.findCustomerById(customerId);
-
-        Booking booking = new Booking(timeSlot, customer);
-
+//     SAVE
+    public void saveBooking(Booking booking) {
         bookingRepository.save(booking);
-
-        customerService.saveBookingToCustomer(customerId,booking);
-
-        return "Booking success";
     }
+
     // UPDATE
 
     // DELETE

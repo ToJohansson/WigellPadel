@@ -23,9 +23,9 @@ public class Booking {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date dateOfBooking;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+//    @ManyToOne(cascade = CascadeType.REFRESH)
+//    @JoinColumn(name = "customer_id")
+//    private Customer customer;
     @OneToOne(cascade = CascadeType.MERGE)
     private TimeSlot timeSlot;
 
@@ -35,8 +35,7 @@ public class Booking {
 
     // TODO FIX CONSTRUCTOR ---------------------------------------------------
 
-    public Booking(TimeSlot timeSlot,Customer customer) {
-        this.customer= customer;
+    public Booking(TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
     }
 
@@ -71,13 +70,7 @@ public class Booking {
     public void setDateOfBooking(Date dateOfBooking) {
         this.dateOfBooking = dateOfBooking;
     }
-    public Customer getCustomerInformation() {
-        return customer;
-    }
 
-    public void setCustomerInformation(Customer customer) {
-        this.customer= customer;
-    }
 
     public TimeSlot getTimeSlot() {
         return timeSlot;

@@ -18,10 +18,10 @@ public class CustomerService {
     private CustomerRepository customerRepository;
     @Autowired
     private AddressService addressService;
-//    @Autowired
-//    private TimeSlotService timeSlotService;
-//    @Autowired
-//    private BookingService bookingService;
+    @Autowired
+    private TimeSlotService timeSlotService;
+    @Autowired
+    private BookingService bookingService;
 
 
     // LIST
@@ -75,19 +75,20 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-//    public String saveBooking(long timeId, long customerId) {
-//        TimeSlot timeSlot = timeSlotService.getTimeSlotById(timeId);
-//        Customer customer = findCustomerById(customerId);
-//
-//        Booking booking = new Booking(timeSlot, customer);
-//
-//        bookingService.saveBooking(booking);
-//
-//        customer.addBookingList(booking);
-//        customerRepository.save(customer);
-//
-//        return "Booking success";
-//    }
+
+    public String saveBooking(long timeId, long customerId) {
+        TimeSlot timeSlot = timeSlotService.getTimeSlotById(timeId);
+        Customer customer = findCustomerById(customerId);
+
+        Booking booking = new Booking(timeSlot);
+
+        bookingService.saveBooking(booking);
+
+        customer.addBookingList(booking);
+        customerRepository.save(customer);
+
+        return "Booking success";
+    }
 
     // DELETE
 
