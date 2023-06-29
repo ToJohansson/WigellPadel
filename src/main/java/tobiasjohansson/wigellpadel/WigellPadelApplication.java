@@ -6,11 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WigellPadelApplication {
     /**
-     * TODO: felhantering vid bokning
-     * TODO: bokningar sparas inte till customers???!!!!:::::......
-     * ATT GÖRA:
-     * färdigställ bokningen i customerservice det ska ej gå att dubbelboka en plan
-     * Något som kollar att id som kommer in till metoden existerar
+     * TODO:
+     * loggning LOG4J!
+     * updatera infromation
+     * uppdatera bookningar
+     * forex exchange för pengar
+     * färdigställ models, alla attribut som ska finnas!
      */
     public static void main(String[] args) {
         SpringApplication.run(WigellPadelApplication.class, args);

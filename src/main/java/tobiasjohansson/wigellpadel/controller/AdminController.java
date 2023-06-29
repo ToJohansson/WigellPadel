@@ -15,10 +15,6 @@ import java.util.List;
 public class AdminController {
 
     /**
-
-     *
-     * • Ta bort en bokning
-     * DELETE /api/v5/deletebooking/{id}
      *
      * • Uppdatera information
      * PUT /api/v5/updateinfo
