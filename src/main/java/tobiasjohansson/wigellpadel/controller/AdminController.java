@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tobiasjohansson.wigellpadel.models.Customer;
-import tobiasjohansson.wigellpadel.services.BookingService;
+import tobiasjohansson.wigellpadel.models.TimeSlot;
 import tobiasjohansson.wigellpadel.services.CustomerService;
+import tobiasjohansson.wigellpadel.services.TimeSlotService;
 
+import java.sql.Time;
 import java.util.List;
 
 @RestController
@@ -15,16 +17,15 @@ import java.util.List;
 public class AdminController {
 
     /**
-     *
-     * • Uppdatera information
-     * PUT /api/v5/updateinfo
+
      *
      * • Uppdatera bokning
      * PUT /api/v5/bookings/{id}
      */
     @Autowired
     private CustomerService customerService;
-
+    @Autowired
+    private TimeSlotService timeSlotService;
 
     public AdminController(){}
 
@@ -41,5 +42,9 @@ public class AdminController {
         customerService.deleteBookingFromCustomer(id);
         return new ResponseEntity<String>("Booking was deleted",HttpStatus.OK);
 
+    }
+    @PutMapping("/updateinfo")
+    public ResponseEntity<TimeSlot> updateTimeSlot(@RequestBody TimeSlot updateTimeSlot) {
+        return ResponseEntity.ok(timeSlotService.updateTimeSlot(updateTimeSlot));
     }
 }

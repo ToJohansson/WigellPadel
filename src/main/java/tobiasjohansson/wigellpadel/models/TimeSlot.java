@@ -14,13 +14,15 @@ public class TimeSlot {
     private String courtName;
     private String time;
     private boolean available;
+    private double price;
 
     public TimeSlot() {
     }
 
-    public TimeSlot(String courtName, String time, boolean available) {
+    public TimeSlot(String courtName, String time,double price, boolean available) {
         this.courtName = courtName;
         this.time = time;
+        this.price = price;
         this.available = available;
     }
 
@@ -47,13 +49,18 @@ public class TimeSlot {
     public void setTime(String time) {
         this.time = time;
     }
-
     public boolean isAvailable() {
         return available;
     }
-
     public void setAvailable(boolean available) {
         this.available = available;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

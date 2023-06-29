@@ -24,17 +24,17 @@ public class BootstrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // TIDER OCH BANOR
-        TimeSlot timeSlot1 = new TimeSlot("Bana 1","1000-1100",true);
-        TimeSlot timeSlot2 = new TimeSlot("Bana 1","1200-1300",true);
-        TimeSlot timeSlot3 = new TimeSlot("Bana 1","1400-1500",true);
+        TimeSlot timeSlot1 = new TimeSlot("Bana 1","1000-1100",250,true);
+        TimeSlot timeSlot2 = new TimeSlot("Bana 1","1200-1300",350,true);
+        TimeSlot timeSlot3 = new TimeSlot("Bana 1","1400-1500",450,true);
 
-        TimeSlot timeSlot4 = new TimeSlot("Bana 2","1000-1100",true);
-        TimeSlot timeSlot5 = new TimeSlot("Bana 2","1200-1300",true);
-        TimeSlot timeSlot6 = new TimeSlot("Bana 2","1400-1500",true);
+        TimeSlot timeSlot4 = new TimeSlot("Bana 2","1000-1100",250,true);
+        TimeSlot timeSlot5 = new TimeSlot("Bana 2","1200-1300",350,true);
+        TimeSlot timeSlot6 = new TimeSlot("Bana 2","1400-1500",450,true);
 
-        TimeSlot timeSlot7 = new TimeSlot("Bana 3","1000-1100",true);
-        TimeSlot timeSlot8 = new TimeSlot("Bana 3","1200-1300",true);
-        TimeSlot timeSlot9 = new TimeSlot("Bana 3","1400-1500",true);
+        TimeSlot timeSlot7 = new TimeSlot("Bana 3","1000-1100",250,true);
+        TimeSlot timeSlot8 = new TimeSlot("Bana 3","1200-1300",350,true);
+        TimeSlot timeSlot9 = new TimeSlot("Bana 3","1400-1500",450,true);
 
         timeSlotRepository.save(timeSlot1);
         timeSlotRepository.save(timeSlot2);
@@ -55,16 +55,9 @@ public class BootstrapData implements CommandLineRunner {
         Customer customer1 = new Customer("Tobbe","J","kollkarl",address1);
         customerRepository.save(customer1);
 
-        /**
-         * ***********************************
-         * BOOKING
+        /*****************************************************************************************
+         * VENUE
          */
-//        Booking booking1 = new Booking(timeSlot1);
-//        Booking booking2 = new Booking(timeSlot2);
-//        bookingRepository.save(booking1);
-//        bookingRepository.save(booking2);
-//        customer1.addBookingList(booking1);
-//        customer1.addBookingList(booking2);
-//        customerRepository.save(customer1);
+
     }
 }
