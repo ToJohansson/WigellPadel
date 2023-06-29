@@ -9,6 +9,7 @@ import tobiasjohansson.wigellpadel.models.TimeSlot;
 import tobiasjohansson.wigellpadel.repositories.BookingRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingService {
@@ -31,4 +32,11 @@ public class BookingService {
     // UPDATE
 
     // DELETE
+    public void deleteBooking(long id){
+        Optional<Booking> optionalBooking = bookingRepository.findById(id);
+        if(optionalBooking.isPresent()){
+            bookingRepository.deleteById(id);
+        }
+    }
+
 }

@@ -29,6 +29,7 @@ public class AdminController {
     @Autowired
     private CustomerService customerService;
 
+
     public AdminController(){}
 
     @GetMapping("/customers")
@@ -38,5 +39,11 @@ public class AdminController {
     @PostMapping("/register")
     public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
         return new ResponseEntity<Customer>(customerService.saveCustomer(customer), HttpStatus.CREATED);
+    }
+    @DeleteMapping("/deletebooking/{id}")
+    public ResponseEntity<String> deleteBooking(@PathVariable("id") long id) {
+        customerService.deleteBookingFromCustomer(id);
+        return new ResponseEntity<String>("Booking was deleted",HttpStatus.OK);
+
     }
 }

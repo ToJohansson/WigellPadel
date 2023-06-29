@@ -38,8 +38,9 @@ public class CustomerController {
     public ResponseEntity<String> bookSlot(@RequestBody Map<String, Long> requestBody) {
         long timeId = requestBody.get("timeId");
         long customerId = requestBody.get("customerId");
+        long players = requestBody.get("players");
 
-        return new ResponseEntity<String>(customerService.saveBooking(timeId, customerId), HttpStatus.OK);
+        return new ResponseEntity<String>(customerService.saveBooking(timeId, customerId,players), HttpStatus.OK);
     }
 
 }

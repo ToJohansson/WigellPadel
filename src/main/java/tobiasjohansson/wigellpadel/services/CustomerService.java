@@ -8,6 +8,7 @@ import tobiasjohansson.wigellpadel.models.Customer;
 import tobiasjohansson.wigellpadel.models.TimeSlot;
 import tobiasjohansson.wigellpadel.repositories.CustomerRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,6 @@ public class CustomerService {
     @Autowired
     private BookingService bookingService;
 
-
     // LIST
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
@@ -31,11 +31,6 @@ public class CustomerService {
 
     public List<Booking> getMyBookings(long id) {
         Customer customer = findCustomerById(id);
-
-        for (int i = 0; i < customer.getMyBookingList().size(); i++){
-            System.out.println(customer.getMyBookingList().get(i).getTimeSlot().getTime());
-        }
-
             return customer.getMyBookingList();
     }
 
@@ -69,27 +64,55 @@ public class CustomerService {
         return customerRepository.save(customerToUpdate);
     }
 
-    public void saveBookingToCustomer(long id,Booking booking){
-        Customer customer = findCustomerById(id);
-        customer.addBookingList(booking);
-        customerRepository.save(customer);
-    }
+    public String saveBooking(long timeId, long customerId, long players) {
 
-
-    public String saveBooking(long timeId, long customerId) {
         TimeSlot timeSlot = timeSlotService.getTimeSlotById(timeId);
-        Customer customer = findCustomerById(customerId);
+        if(timeSlot.isAvailable()) {
+            timeSlot.setAvailable(false);
 
-        Booking booking = new Booking(timeSlot);
+            Customer customer = findCustomerById(customerId);
 
-        bookingService.saveBooking(booking);
+            Booking booking = new Booking(timeSlot);
+            booking.setDateOfBooking(new Date());
+            booking.setPlayers((int) players);
+            bookingService.saveBooking(booking);
 
-        customer.addBookingList(booking);
-        customerRepository.save(customer);
+            customer.addBookingList(booking);
+            customerRepository.save(customer);
 
-        return "Booking success";
+            return "Booking success";
+        }else
+            return "time is already booked";
     }
 
     // DELETE
+    public String deleteBookingFromCustomer(long id) {
+        Customer customer = findCustomerById(id);
+
+        List<Booking> bookingList = customer.getMyBookingList();
+        Booking bookingToRemove = null;
+
+        for (Booking booking : bookingList) {
+            if (booking.getBookingId() == id) {
+                bookingToRemove = booking;
+                break;
+            }
+        }
+
+
+        if (bookingToRemove != null) {
+
+            TimeSlot timeSlot = bookingToRemove.getTimeSlot();
+            timeSlot.setAvailable(true);
+            timeSlotService.saveTimeSlot(timeSlot);
+
+            bookingList.remove(bookingToRemove);
+            customerRepository.save(customer);
+
+            bookingService.deleteBooking(id);
+            return "The booking was deleted";
+        }
+        return "Wrong id or does not exist...";
+    }
 
 }

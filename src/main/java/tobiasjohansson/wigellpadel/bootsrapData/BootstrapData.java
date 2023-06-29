@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import tobiasjohansson.wigellpadel.models.*;
 import tobiasjohansson.wigellpadel.repositories.*;
 
-import java.util.Date;
-
 
 @Component
 public class BootstrapData implements CommandLineRunner {
@@ -16,8 +14,8 @@ public class BootstrapData implements CommandLineRunner {
     private AddressRepository addressRepository;
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private BookingRepository bookingRepository;
+//    @Autowired
+//    private BookingRepository bookingRepository;
     @Autowired
     private TimeSlotRepository timeSlotRepository;
 
@@ -61,12 +59,12 @@ public class BootstrapData implements CommandLineRunner {
          * ***********************************
          * BOOKING
          */
-        Booking booking1 = new Booking(timeSlot1);
-        Booking booking2 = new Booking(timeSlot2);
-        bookingRepository.save(booking1);
-        bookingRepository.save(booking2);
-        customer1.addBookingList(booking1);
-        customer1.addBookingList(booking2);
-        customerRepository.save(customer1);
+//        Booking booking1 = new Booking(timeSlot1);
+//        Booking booking2 = new Booking(timeSlot2);
+//        bookingRepository.save(booking1);
+//        bookingRepository.save(booking2);
+//        customer1.addBookingList(booking1);
+//        customer1.addBookingList(booking2);
+//        customerRepository.save(customer1);
     }
 }

@@ -24,4 +24,7 @@ public class TimeSlotService {
     public TimeSlot getTimeSlotById(long id) throws ResourceNotFoundException {
         return timeSlotRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("TimeSlot", "ID", id));
     }
+    public void saveTimeSlot(TimeSlot timeSlot){
+        timeSlotRepository.save(timeSlot);
+    }
 }
