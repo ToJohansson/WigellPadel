@@ -5,37 +5,46 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tobiasjohansson.wigellpadel.models.Booking;
-import tobiasjohansson.wigellpadel.models.Court;
+import tobiasjohansson.wigellpadel.models.Customer;
+import tobiasjohansson.wigellpadel.models.TimeSlot;
+import tobiasjohansson.wigellpadel.repositories.CustomerRepository;
 import tobiasjohansson.wigellpadel.services.BookingService;
-import tobiasjohansson.wigellpadel.services.CourtService;
 import tobiasjohansson.wigellpadel.services.CustomerService;
+import tobiasjohansson.wigellpadel.services.TimeSlotService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v5/")
 public class CustomerController {
 
-    @Autowired
-    private CourtService courtService;
+
     @Autowired
     private CustomerService customerService;
     @Autowired
     private BookingService bookingService;
+    @Autowired
+    private TimeSlotService timeSlotService;
 
-    public CustomerController(){
+
+        @GetMapping("/availability")
+    public List<TimeSlot> getAllCourts() {
+        return timeSlotService.getCourts();
     }
 
-    @GetMapping("/availability")
-    public List<Court> getAllCourts(){
-        return courtService.getCourts();
-    }
     @GetMapping("/mybookings/{id}")
-    public List<Booking> getMyBookings(@PathVariable("id") Long id){
-        return customerService.getMyBookings(id);
+    public ResponseEntity<List<Booking>> getMyBookings(@PathVariable("id") long id) {
+
+        return ResponseEntity.ok(customerService.getMyBookings(id));
     }
+
     @PostMapping("/bookings")
-    public ResponseEntity<String> bookSlot(@RequestBody Booking booking){
-        return new ResponseEntity<String>(bookingService.saveBooking(booking), HttpStatus.OK);
+    public ResponseEntity<String> bookSlot(@RequestBody Map<String, Long> requestBody) {
+        long timeId = requestBody.get("timeId");
+        long customerId = requestBody.get("customerId");
+
+        return new ResponseEntity<String>(bookingService.saveBooking(timeId, customerId), HttpStatus.OK);
     }
+
 }

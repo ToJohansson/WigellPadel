@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WigellPadelApplication {
     /**
      * TODO: felhantering vid bokning
-     * TODO: saveBooking ska vara i bookingService inte i CustomerService
+     * TODO: bokningar sparas inte till customers???!!!!:::::......
      * ATT GÖRA:
      * färdigställ bokningen i customerservice det ska ej gå att dubbelboka en plan
      * Något som kollar att id som kommer in till metoden existerar

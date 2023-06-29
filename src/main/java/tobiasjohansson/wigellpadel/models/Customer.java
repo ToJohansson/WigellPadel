@@ -1,8 +1,10 @@
 package tobiasjohansson.wigellpadel.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,12 +21,13 @@ public class Customer {
     @Column(length = 100, nullable = false)
     private String username;
 
-    @OneToMany()
-    private List<Booking> myBookingList;
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Booking> myBookingList = new ArrayList<>();
     @ManyToOne()
     private Address address;
 
-   @Transient
+    @Transient
     private long holderForId;
 
     public Customer() {
@@ -81,11 +84,7 @@ public class Customer {
     }
 
     public List<Booking> getMyBookingList() {
-        return myBookingList;
-    }
-
-    public void setMyBookingList(List<Booking> myBookingList) {
-        this.myBookingList = myBookingList;
+        return this.myBookingList;
     }
 
     public long getHolderForId() {
@@ -95,7 +94,8 @@ public class Customer {
     public void setHolderForId(long addressIdHolder) {
         this.holderForId = addressIdHolder;
     }
-    public void addBookingList(Booking booking){
+
+    public void addBookingList(Booking booking) {
         this.myBookingList.add(booking);
     }
 }

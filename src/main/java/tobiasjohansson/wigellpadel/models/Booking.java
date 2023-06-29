@@ -1,5 +1,6 @@
 package tobiasjohansson.wigellpadel.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -21,32 +22,27 @@ public class Booking {
     @Column(name = "DATE_OF_BOOKING")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date dateOfBooking;
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Court> court = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "booking_court",
-            joinColumns = @JoinColumn(name = "booking_id"),
-            inverseJoinColumns = @JoinColumn(name = "court_id"))
-    private Set<Court> courts = new HashSet<>();
-    @ManyToOne()
-    private Customer customerInformation;
-    @Transient
-    private long courtIdHolder;
-    @Transient
-    private int slotIndexHolder;
-    @Transient
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private TimeSlot timeSlot;
+
+    private int indexForTime;
+    private long timeId;
     private long customerIdHolder;
 
-    public Booking( long customerIdHolder, long courtIdHolder, int slotIndexHolder, int players) {
-        this.customerIdHolder = customerIdHolder;
-        this.courtIdHolder = courtIdHolder;
-        this.slotIndexHolder = slotIndexHolder;
-        this.players = players;
+    // TODO FIX CONSTRUCTOR ---------------------------------------------------
 
+    public Booking(TimeSlot timeSlot,Customer customer) {
+        this.customer= customer;
+        this.timeSlot = timeSlot;
     }
 
-    public Booking(){}
+
+    public Booking() {
+    }
 
     public long getBookingId() {
         return bookingId;
@@ -75,58 +71,19 @@ public class Booking {
     public void setDateOfBooking(Date dateOfBooking) {
         this.dateOfBooking = dateOfBooking;
     }
-
-    public long getCourtIdHolder() {
-        return courtIdHolder;
-    }
-
     public Customer getCustomerInformation() {
-        return customerInformation;
+        return customer;
     }
 
     public void setCustomerInformation(Customer customer) {
-        this.customerInformation = customer;
+        this.customer= customer;
     }
 
-    public void setCourtIdHolder(long courtIdHolder) {
-        this.courtIdHolder = courtIdHolder;
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
     }
 
-    public long getSlotIndexHolder() {
-        return slotIndexHolder;
-    }
-
-//    public void addCourt(Court court){
-//        this.court.add(court);
-//    }
-//    public List<Court> getCourt() {
-//        return court;
-//    }
-//
-//    public void setCourt(List<Court> court) {
-//        this.court = court;
-//    }
-    public void addCourt(Court court) {
-        courts.add(court);
-    }
-
-    public Set<Court> getCourts() {
-        return courts;
-    }
-
-    public void setCourts(Set<Court> courts) {
-        this.courts = courts;
-    }
-
-    public void setSlotIndexHolder(int slotIndexHolder) {
-        this.slotIndexHolder = slotIndexHolder;
-    }
-
-    public long getCustomerIdHolder() {
-        return customerIdHolder;
-    }
-
-    public void setCustomerIdHolder(long customerIdHolder) {
-        this.customerIdHolder = customerIdHolder;
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
     }
 }
