@@ -30,7 +30,6 @@ public class TimeSlotService {
     }
 
     // UPDATE information
-    // TODO ----------------------------------------------------
     public TimeSlot updateTimeSlot(TimeSlot updateTimeSlot){
         long id = updateTimeSlot.getTimeSlotId();
         TimeSlot existingTimeSlot = getTimeSlotById(id);
@@ -40,8 +39,8 @@ public class TimeSlotService {
         existingTimeSlot.setPrice(updateTimeSlot.getPrice());
         existingTimeSlot.setAvailable(updateTimeSlot.isAvailable());
 
-        TimeSlot updatedTimeSlotObj = timeSlotRepository.save(existingTimeSlot);
-        return updatedTimeSlotObj;
+        return timeSlotRepository.save(existingTimeSlot);
+
     }
 
 

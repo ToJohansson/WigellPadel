@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tobiasjohansson.wigellpadel.models.Booking;
 import tobiasjohansson.wigellpadel.models.Customer;
 import tobiasjohansson.wigellpadel.models.TimeSlot;
+import tobiasjohansson.wigellpadel.services.BookingService;
 import tobiasjohansson.wigellpadel.services.CustomerService;
 import tobiasjohansson.wigellpadel.services.TimeSlotService;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v5/")
@@ -26,6 +29,8 @@ public class AdminController {
     private CustomerService customerService;
     @Autowired
     private TimeSlotService timeSlotService;
+    @Autowired
+    private BookingService bookingService;
 
     public AdminController(){}
 
@@ -46,5 +51,12 @@ public class AdminController {
     @PutMapping("/updateinfo")
     public ResponseEntity<TimeSlot> updateTimeSlot(@RequestBody TimeSlot updateTimeSlot) {
         return ResponseEntity.ok(timeSlotService.updateTimeSlot(updateTimeSlot));
+    }
+    @PutMapping("/bookings/{id}")
+    public ResponseEntity<String> bookSlot(@PathVariable("id")long id, @RequestBody Map<String, Long> requestBody) {
+        long bookingId = requestBody.get("bookingId");
+        long timeId = requestBody.get("timeId");
+
+        return ResponseEntity.ok(customerService.updateBooking(id,bookingId,timeId));
     }
 }

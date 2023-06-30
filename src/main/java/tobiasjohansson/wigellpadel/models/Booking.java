@@ -26,6 +26,14 @@ public class Booking {
     @OneToOne(cascade = CascadeType.MERGE)
     private TimeSlot timeSlot;
 
+    public Booking(int players, Date dateOfBooking, TimeSlot timeSlot) {
+        this.bookingId = bookingId;
+        this.totalPrice = totalPrice;
+        this.players = players;
+        this.dateOfBooking = dateOfBooking;
+        this.timeSlot = timeSlot;
+    }
+
     public Booking(TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
     }

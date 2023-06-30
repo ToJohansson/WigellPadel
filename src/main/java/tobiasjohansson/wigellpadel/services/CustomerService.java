@@ -31,7 +31,7 @@ public class CustomerService {
 
     public List<Booking> getMyBookings(long id) {
         Customer customer = findCustomerById(id);
-            return customer.getMyBookingList();
+        return customer.getMyBookingList();
     }
 
     // SAVE
@@ -53,21 +53,36 @@ public class CustomerService {
     }
 
     // UPDATE
-    public Customer updateCustomer(Customer customer, Long id) {
+    public String updateBooking(long id, long bookingId, long timeId) {
         Customer customerToUpdate = findCustomerById(id);
 
-        customerToUpdate.setFirstName(customer.getFirstName());
-        customerToUpdate.setLastName(customer.getLastName());
-        customerToUpdate.setUsername(customer.getUsername());
-        customerToUpdate.setAddress(customer.getAddress());
+        Booking bookingToUpdate = null;
+        List<Booking> bookingList = customerToUpdate.getMyBookingList();
+        for (Booking booking : bookingList) {
+            if (booking.getBookingId() == bookingId) {
+                bookingToUpdate = booking;
+                break;
+            }
+        }
 
-        return customerRepository.save(customerToUpdate);
+        if (bookingToUpdate != null) {
+            bookingToUpdate.getTimeSlot().setAvailable(true);
+            timeSlotService.saveTimeSlot(bookingToUpdate.getTimeSlot());
+            TimeSlot updatedTimeSlot = timeSlotService.getTimeSlotById(timeId);
+            bookingToUpdate.setTimeSlot(updatedTimeSlot);
+            bookingService.updateBooking(bookingToUpdate);
+
+            customerRepository.save(customerToUpdate);
+
+            return "Booking was updated";
+        }
+        return "Failed to update booking";
     }
 
     public String saveBooking(long timeId, long customerId, long players) {
 
         TimeSlot timeSlot = timeSlotService.getTimeSlotById(timeId);
-        if(timeSlot.isAvailable()) {
+        if (timeSlot.isAvailable()) {
             timeSlot.setAvailable(false);
 
             Customer customer = findCustomerById(customerId);
@@ -81,7 +96,7 @@ public class CustomerService {
             customerRepository.save(customer);
 
             return "Booking success";
-        }else
+        } else
             return "time is already booked";
     }
 
@@ -98,8 +113,6 @@ public class CustomerService {
                 break;
             }
         }
-
-
         if (bookingToRemove != null) {
 
             TimeSlot timeSlot = bookingToRemove.getTimeSlot();
