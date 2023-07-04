@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
+import tobiasjohansson.wigellpadel.logging.Log4j;
 import tobiasjohansson.wigellpadel.models.TimeSlot;
 import tobiasjohansson.wigellpadel.repositories.TimeSlotRepository;
 
@@ -38,6 +39,8 @@ public class TimeSlotService {
         existingTimeSlot.setTime(updateTimeSlot.getTime());
         existingTimeSlot.setPrice(updateTimeSlot.getPrice());
         existingTimeSlot.setAvailable(updateTimeSlot.isAvailable());
+
+        Log4j.logger.info("[Time SLot Updated] with id:" + updateTimeSlot.getTimeSlotId());
 
         return timeSlotRepository.save(existingTimeSlot);
 

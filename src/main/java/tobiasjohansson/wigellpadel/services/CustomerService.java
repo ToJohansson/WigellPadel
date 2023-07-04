@@ -3,6 +3,7 @@ package tobiasjohansson.wigellpadel.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
+import tobiasjohansson.wigellpadel.logging.Log4j;
 import tobiasjohansson.wigellpadel.models.Booking;
 import tobiasjohansson.wigellpadel.models.Customer;
 import tobiasjohansson.wigellpadel.models.TimeSlot;
@@ -10,7 +11,6 @@ import tobiasjohansson.wigellpadel.repositories.CustomerRepository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -38,11 +38,15 @@ public class CustomerService {
     public Customer saveCustomer(Customer customer) {
         if (customer.getHolderForId() > 0) {
             customer.setAddress(addressService.addressById(customer.getHolderForId()));
-            customer.setHolderForId(0);
+
+            // TODO: check if username already exists!
+
+            Log4j.logger.info("[Customer Created] Username: " + customer.getUsername() +", -- new address added with id:" + customer.getHolderForId());
             return customerRepository.save(customer);
 
         } else
-            addressService.saveAddress(customer.getAddress());
+            Log4j.logger.info("[Customer Created] Username: " + customer.getUsername());
+        addressService.saveAddress(customer.getAddress());
         return customerRepository.save(customer);
     }
 
@@ -74,8 +78,10 @@ public class CustomerService {
 
             customerRepository.save(customerToUpdate);
 
+            Log4j.logger.info("[Booking Updated] Booking with id:" + bookingId + " was updated");
             return "Booking was updated";
         }
+        Log4j.logger.info("[Update Failed] Booking with id:" + bookingId + " was NOT updated");
         return "Failed to update booking";
     }
 
@@ -95,24 +101,27 @@ public class CustomerService {
             customer.addBookingList(booking);
             customerRepository.save(customer);
 
+            Log4j.logger.info("[Booking Created] customer with id:" + customerId + ", timeslot with id:" + timeId);
+
             return "Booking success";
         } else
-            return "time is already booked";
+            Log4j.logger.info("[Booking Failed] customer with id:" + customerId + ", timeslot with id:" + timeId);
+        return "time is already booked";
     }
 
     // DELETE
-    public String deleteBookingFromCustomer(long customerId,long bookingId) {
+    public String deleteBookingFromCustomer(long customerId, long bookingId) {
         Customer customer = findCustomerById(customerId);
 
         List<Booking> bookingList = customer.getMyBookingList();
         Booking bookingToRemove = null;
 
-            for (Booking booking : bookingList) {
-                if (booking.getBookingId() == bookingId) {
-                    bookingToRemove = booking;
-                    break;
-                }
+        for (Booking booking : bookingList) {
+            if (booking.getBookingId() == bookingId) {
+                bookingToRemove = booking;
+                break;
             }
+        }
         if (bookingToRemove != null) {
 
             TimeSlot timeSlot = bookingToRemove.getTimeSlot();
@@ -123,8 +132,11 @@ public class CustomerService {
             customerRepository.save(customer);
 
             bookingService.deleteBooking(bookingId);
+
+            Log4j.logger.info("[Deleted] Booking with id:" + bookingId + ", from customer with id:" + customerId);
             return "The booking was deleted";
         }
+        Log4j.logger.info("[Delete Failed] Booking with id:" + bookingId + ", from customer with id:" + customerId);
         return "Wrong id or does not exist...";
     }
 

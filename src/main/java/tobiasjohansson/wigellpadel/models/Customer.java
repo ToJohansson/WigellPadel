@@ -18,7 +18,7 @@ public class Customer {
     private String firstName;
     @Column(length = 50, nullable = false)
     private String lastName;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, unique = true)
     private String username;
 
     @JsonIgnore
