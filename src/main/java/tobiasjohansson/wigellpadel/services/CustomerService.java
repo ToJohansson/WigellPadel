@@ -101,18 +101,18 @@ public class CustomerService {
     }
 
     // DELETE
-    public String deleteBookingFromCustomer(long id) {
-        Customer customer = findCustomerById(id);
+    public String deleteBookingFromCustomer(long customerId,long bookingId) {
+        Customer customer = findCustomerById(customerId);
 
         List<Booking> bookingList = customer.getMyBookingList();
         Booking bookingToRemove = null;
 
-        for (Booking booking : bookingList) {
-            if (booking.getBookingId() == id) {
-                bookingToRemove = booking;
-                break;
+            for (Booking booking : bookingList) {
+                if (booking.getBookingId() == bookingId) {
+                    bookingToRemove = booking;
+                    break;
+                }
             }
-        }
         if (bookingToRemove != null) {
 
             TimeSlot timeSlot = bookingToRemove.getTimeSlot();
@@ -122,7 +122,7 @@ public class CustomerService {
             bookingList.remove(bookingToRemove);
             customerRepository.save(customer);
 
-            bookingService.deleteBooking(id);
+            bookingService.deleteBooking(bookingId);
             return "The booking was deleted";
         }
         return "Wrong id or does not exist...";

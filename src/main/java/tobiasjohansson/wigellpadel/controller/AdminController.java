@@ -20,8 +20,6 @@ import java.util.Map;
 public class AdminController {
 
     /**
-
-     *
      * • Uppdatera bokning
      * PUT /api/v5/bookings/{id}
      */
@@ -32,31 +30,36 @@ public class AdminController {
     @Autowired
     private BookingService bookingService;
 
-    public AdminController(){}
+    public AdminController() {
+    }
 
     @GetMapping("/customers")
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers() {
         return customerService.getCustomers();
     }
+
     @PostMapping("/register")
-    public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
+    public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) {
         return new ResponseEntity<Customer>(customerService.saveCustomer(customer), HttpStatus.CREATED);
     }
-    @DeleteMapping("/deletebooking/{id}")
-    public ResponseEntity<String> deleteBooking(@PathVariable("id") long id) {
-        customerService.deleteBookingFromCustomer(id);
-        return new ResponseEntity<String>("Booking was deleted",HttpStatus.OK);
 
+    @DeleteMapping("/deletebooking/{id}")
+    public ResponseEntity<String> deleteBooking(@PathVariable("id") long customerId, @RequestBody Map<String,Long> requestBody) {
+        long bookingId = requestBody.get("bookingId");
+        customerService.deleteBookingFromCustomer(customerId,bookingId);
+        return new ResponseEntity<String>("Booking was deleted", HttpStatus.OK);
     }
+
     @PutMapping("/updateinfo")
     public ResponseEntity<TimeSlot> updateTimeSlot(@RequestBody TimeSlot updateTimeSlot) {
         return ResponseEntity.ok(timeSlotService.updateTimeSlot(updateTimeSlot));
     }
+
     @PutMapping("/bookings/{id}")
-    public ResponseEntity<String> bookSlot(@PathVariable("id")long id, @RequestBody Map<String, Long> requestBody) {
+    public ResponseEntity<String> bookSlot(@PathVariable("id") long id, @RequestBody Map<String, Long> requestBody) {
         long bookingId = requestBody.get("bookingId");
         long timeId = requestBody.get("timeId");
 
-        return ResponseEntity.ok(customerService.updateBooking(id,bookingId,timeId));
+        return ResponseEntity.ok(customerService.updateBooking(id, bookingId, timeId));
     }
 }
