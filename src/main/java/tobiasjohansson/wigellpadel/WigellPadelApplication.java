@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WigellPadelApplication {
     /**
      * TODO:
-     * loggning LOG4J!
      * forex exchange för pengar
+     * SECURITY BASIC
      *
-     * felmeddelande när man söker sin bookningslista och användare inte existerar
+     * felmeddelande när man söker sin bokningslista och användare inte existerar
      * felsök med postman (gör det sist)
      */
     public static void main(String[] args) {
