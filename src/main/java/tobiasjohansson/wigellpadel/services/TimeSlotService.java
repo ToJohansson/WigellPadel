@@ -37,7 +37,7 @@ public class TimeSlotService {
 
         existingTimeSlot.setCourtName(updateTimeSlot.getCourtName());
         existingTimeSlot.setTime(updateTimeSlot.getTime());
-        existingTimeSlot.setPrice(updateTimeSlot.getPrice());
+        existingTimeSlot.setSek(updateTimeSlot.getSek());
         existingTimeSlot.setAvailable(updateTimeSlot.isAvailable());
 
         Log4j.logger.info("[Time SLot Updated] with id:" + updateTimeSlot.getTimeSlotId());
