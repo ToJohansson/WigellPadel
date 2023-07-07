@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tobiasjohansson.wigellpadel.models.Booking;
 import tobiasjohansson.wigellpadel.models.Customer;
 import tobiasjohansson.wigellpadel.models.TimeSlot;
-import tobiasjohansson.wigellpadel.services.BookingService;
 import tobiasjohansson.wigellpadel.services.CustomerService;
 import tobiasjohansson.wigellpadel.services.TimeSlotService;
 
-import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
@@ -19,16 +16,10 @@ import java.util.Map;
 @RequestMapping("/api/v5/")
 public class AdminController {
 
-    /**
-     * • Uppdatera bokning
-     * PUT /api/v5/bookings/{id}
-     */
     @Autowired
     private CustomerService customerService;
     @Autowired
     private TimeSlotService timeSlotService;
-    @Autowired
-    private BookingService bookingService;
 
     public AdminController() {
     }
