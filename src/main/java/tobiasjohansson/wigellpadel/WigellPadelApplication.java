@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WigellPadelApplication {
     /**
-     * TODO:
+     * TODO: ge admin åtkomst till sina endpoints och user till sina
      * forex exchange för pengar
-     * SECURITY BASIC
+     * SECURITY BASIC - verkar funka
      *
      * felmeddelande när man söker sin bokningslista och användare inte existerar
      * felsök med postman (gör det sist)
