@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
 import tobiasjohansson.wigellpadel.models.Booking;
-import tobiasjohansson.wigellpadel.models.TimeSlot;
 import tobiasjohansson.wigellpadel.repositories.BookingRepository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,9 +1,6 @@
 package tobiasjohansson.wigellpadel.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-//import jakarta.persistence.*;
 import javax.persistence.*;
 
 import java.util.*;
@@ -17,8 +14,8 @@ public class Booking {
     private long bookingId;
     @Column(name = "TOTAL_PRICE")
     private double totalPrice;
-    @Column(name = "PLAYERS")
 
+    @Column(name = "PLAYERS", nullable = false)
     private int players;
     @Column(name = "DATE_OF_BOOKING")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")

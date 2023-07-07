@@ -3,6 +3,7 @@ package tobiasjohansson.wigellpadel.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
+import tobiasjohansson.wigellpadel.exceptions.UsernameAlreadyExistsException;
 import tobiasjohansson.wigellpadel.logging.Log4j;
 import tobiasjohansson.wigellpadel.models.Booking;
 import tobiasjohansson.wigellpadel.models.Customer;
@@ -11,6 +12,7 @@ import tobiasjohansson.wigellpadel.repositories.CustomerRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -35,11 +37,15 @@ public class CustomerService {
     }
 
     // SAVE
-    public Customer saveCustomer(Customer customer) {
-        if (customer.getHolderForId() > 0) {
-            customer.setAddress(addressService.addressById(customer.getHolderForId()));
+    public Customer saveCustomer(Customer customer)throws UsernameAlreadyExistsException {
 
-            // TODO: check if username already exists!
+        Customer existingUsername = customerRepository.findCustomerByUsername(customer.getUsername());
+        if(existingUsername != null){
+            throw new UsernameAlreadyExistsException(existingUsername.getUsername());
+        }
+
+        if (customer.getHolderForId() > 0 ) {
+            customer.setAddress(addressService.addressById(customer.getHolderForId()));
 
             Log4j.logger.info("[Customer Created] Username: " + customer.getUsername() +", -- new address added with id:" + customer.getHolderForId());
             return customerRepository.save(customer);
@@ -51,7 +57,7 @@ public class CustomerService {
     }
 
     // FIND CUSTOMER BY ID
-    public Customer findCustomerById(long id) {
+    public Customer findCustomerById(long id) throws ResourceNotFoundException{
         return customerRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Customer", "ID", id));
     }

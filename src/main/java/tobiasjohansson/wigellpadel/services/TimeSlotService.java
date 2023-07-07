@@ -1,7 +1,6 @@
 package tobiasjohansson.wigellpadel.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
 import tobiasjohansson.wigellpadel.logging.Log4j;

@@ -14,8 +14,7 @@ public class BootstrapData implements CommandLineRunner {
     private AddressRepository addressRepository;
     @Autowired
     private CustomerRepository customerRepository;
-//    @Autowired
-//    private BookingRepository bookingRepository;
+
     @Autowired
     private TimeSlotRepository timeSlotRepository;
 
@@ -55,9 +54,6 @@ public class BootstrapData implements CommandLineRunner {
         Customer customer1 = new Customer("Tobbe","J","kollkarl",address1);
         customerRepository.save(customer1);
 
-        /*****************************************************************************************
-         * VENUE
-         */
 
     }
 }

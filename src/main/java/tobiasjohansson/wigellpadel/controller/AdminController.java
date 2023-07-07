@@ -37,8 +37,8 @@ public class AdminController {
     @DeleteMapping("/deletebooking/{id}")
     public ResponseEntity<String> deleteBooking(@PathVariable("id") long customerId, @RequestBody Map<String,Long> requestBody) {
         long bookingId = requestBody.get("bookingId");
-        customerService.deleteBookingFromCustomer(customerId,bookingId);
-        return new ResponseEntity<String>("Booking was deleted", HttpStatus.OK);
+       String response = customerService.deleteBookingFromCustomer(customerId,bookingId);
+        return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
     @PutMapping("/updateinfo")

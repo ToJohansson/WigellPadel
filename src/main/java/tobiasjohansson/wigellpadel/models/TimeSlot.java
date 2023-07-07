@@ -1,6 +1,5 @@
 package tobiasjohansson.wigellpadel.models;
 
-//import jakarta.persistence.*;
 import javax.persistence.*;
 
 @Entity

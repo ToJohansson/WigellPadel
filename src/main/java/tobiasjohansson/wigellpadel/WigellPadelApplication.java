@@ -6,11 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WigellPadelApplication {
     /**
-     * TODO: ge admin åtkomst till sina endpoints och user till sina
-     * forex exchange för pengar
-     * SECURITY BASIC - verkar funka
      *
-     * felmeddelande när man söker sin bokningslista och användare inte existerar
+     * forex exchange för pengar : API KEY???
+     * Få totalt pris för dina bokningar? eller den enskilde bokningens totala pris?
+     *
      * felsök med postman (gör det sist)
      */
     public static void main(String[] args) {
