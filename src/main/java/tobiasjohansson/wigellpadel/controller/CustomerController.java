@@ -22,8 +22,12 @@ public class CustomerController {
     @Autowired
     private TimeSlotService timeSlotService;
 
+    @GetMapping("/index")
+    public String welcome(){
+        return "";
+    }
 
-        @GetMapping("/availability")
+    @GetMapping("/availability")
     public List<TimeSlot> getAllCourts() {
         return timeSlotService.getCourts();
     }

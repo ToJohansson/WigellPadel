@@ -1,7 +1,6 @@
 package tobiasjohansson.wigellpadel.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tobiasjohansson.wigellpadel.exceptions.ResourceNotFoundException;
 import tobiasjohansson.wigellpadel.logging.Log4j;
@@ -16,6 +15,9 @@ public class TimeSlotService {
     @Autowired
     private TimeSlotRepository timeSlotRepository;
 
+    @Autowired
+    private CurrencyConversionService currencyConversionService;
+
     public TimeSlotService() {
     }
 
@@ -27,6 +29,7 @@ public class TimeSlotService {
         return timeSlotRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("TimeSlot", "ID", id));
     }
     public void saveTimeSlot(TimeSlot timeSlot){
+        timeSlot.setEuro( currencyConversionService.convertSEKToEUR(timeSlot.getSek()));
         timeSlotRepository.save(timeSlot);
     }
 
@@ -37,7 +40,8 @@ public class TimeSlotService {
 
         existingTimeSlot.setCourtName(updateTimeSlot.getCourtName());
         existingTimeSlot.setTime(updateTimeSlot.getTime());
-        existingTimeSlot.setPrice(updateTimeSlot.getPrice());
+        existingTimeSlot.setSek(updateTimeSlot.getSek());
+        existingTimeSlot.setEuro(currencyConversionService.convertSEKToEUR(updateTimeSlot.getSek()));
         existingTimeSlot.setAvailable(updateTimeSlot.isAvailable());
 
         Log4j.logger.info("[Time SLot Updated] with id:" + updateTimeSlot.getTimeSlotId());
@@ -45,6 +49,4 @@ public class TimeSlotService {
         return timeSlotRepository.save(existingTimeSlot);
 
     }
-
-
 }

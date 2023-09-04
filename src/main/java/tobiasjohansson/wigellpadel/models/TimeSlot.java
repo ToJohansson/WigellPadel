@@ -2,7 +2,6 @@ package tobiasjohansson.wigellpadel.models;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "TIME_SLOTS")
 public class TimeSlot {
@@ -14,24 +13,22 @@ public class TimeSlot {
     private String courtName;
     private String time;
     private boolean available;
-    private double price;
+    private double sek;
+    private double euro;
 
     public TimeSlot() {
     }
 
-    public TimeSlot(String courtName, String time,double price, boolean available) {
+    public TimeSlot(String courtName, String time,double sek,double euro ,boolean available) {
         this.courtName = courtName;
         this.time = time;
-        this.price = price;
+        this.sek = sek;
+        this.euro = euro;
         this.available = available;
     }
 
     public long getTimeSlotId() {
         return timeSlotId;
-    }
-
-    public void setTimeSlotId(long timeSlotId) {
-        this.timeSlotId = timeSlotId;
     }
 
     public String getCourtName() {
@@ -56,11 +53,19 @@ public class TimeSlot {
         this.available = available;
     }
 
-    public double getPrice() {
-        return price;
+    public double getSek() {
+        return sek;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setSek(double sek) {
+        this.sek = sek;
+    }
+
+    public double getEuro() {
+        return euro;
+    }
+
+    public void setEuro(double euro) {
+        this.euro = euro;
     }
 }

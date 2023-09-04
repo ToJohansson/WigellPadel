@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import tobiasjohansson.wigellpadel.models.*;
 import tobiasjohansson.wigellpadel.repositories.*;
+import tobiasjohansson.wigellpadel.services.TimeSlotService;
 
 
 @Component
@@ -14,37 +15,47 @@ public class BootstrapData implements CommandLineRunner {
     private AddressRepository addressRepository;
     @Autowired
     private CustomerRepository customerRepository;
-//    @Autowired
-//    private BookingRepository bookingRepository;
     @Autowired
     private TimeSlotRepository timeSlotRepository;
+
+    @Autowired
+    private TimeSlotService timeSlotService;
 
 
     @Override
     public void run(String... args) throws Exception {
 
         // TIDER OCH BANOR
-        TimeSlot timeSlot1 = new TimeSlot("Bana 1","1000-1100",250,true);
-        TimeSlot timeSlot2 = new TimeSlot("Bana 1","1200-1300",350,true);
-        TimeSlot timeSlot3 = new TimeSlot("Bana 1","1400-1500",450,true);
+        TimeSlot timeSlot1 = new TimeSlot("Bana 1","1000-1100",250,0,true);
+        TimeSlot timeSlot2 = new TimeSlot("Bana 1","1200-1300",350,0,true);
+        TimeSlot timeSlot3 = new TimeSlot("Bana 1","1400-1500",450,0,true);
 
-        TimeSlot timeSlot4 = new TimeSlot("Bana 2","1000-1100",250,true);
-        TimeSlot timeSlot5 = new TimeSlot("Bana 2","1200-1300",350,true);
-        TimeSlot timeSlot6 = new TimeSlot("Bana 2","1400-1500",450,true);
+        TimeSlot timeSlot4 = new TimeSlot("Bana 2","1000-1100",250,0,true);
+        TimeSlot timeSlot5 = new TimeSlot("Bana 2","1200-1300",350,0,true);
+        TimeSlot timeSlot6 = new TimeSlot("Bana 2","1400-1500",450,0,true);
 
-        TimeSlot timeSlot7 = new TimeSlot("Bana 3","1000-1100",250,true);
-        TimeSlot timeSlot8 = new TimeSlot("Bana 3","1200-1300",350,true);
-        TimeSlot timeSlot9 = new TimeSlot("Bana 3","1400-1500",450,true);
+        TimeSlot timeSlot7 = new TimeSlot("Bana 3","1000-1100",250,0,true);
+        TimeSlot timeSlot8 = new TimeSlot("Bana 3","1200-1300",350,0,true);
+        TimeSlot timeSlot9 = new TimeSlot("Bana 3","1400-1500",450,0,true);
 
-        timeSlotRepository.save(timeSlot1);
-        timeSlotRepository.save(timeSlot2);
-        timeSlotRepository.save(timeSlot3);
-        timeSlotRepository.save(timeSlot4);
-        timeSlotRepository.save(timeSlot5);
-        timeSlotRepository.save(timeSlot6);
-        timeSlotRepository.save(timeSlot7);
-        timeSlotRepository.save(timeSlot8);
-        timeSlotRepository.save(timeSlot9);
+//        timeSlotRepository.save(timeSlot1);
+//        timeSlotRepository.save(timeSlot2);
+//        timeSlotRepository.save(timeSlot3);
+//        timeSlotRepository.save(timeSlot4);
+//        timeSlotRepository.save(timeSlot5);
+//        timeSlotRepository.save(timeSlot6);
+//        timeSlotRepository.save(timeSlot7);
+//        timeSlotRepository.save(timeSlot8);
+//        timeSlotRepository.save(timeSlot9);
+        timeSlotService.saveTimeSlot(timeSlot1);
+        timeSlotService.saveTimeSlot(timeSlot2);
+        timeSlotService.saveTimeSlot(timeSlot3);
+        timeSlotService.saveTimeSlot(timeSlot4);
+        timeSlotService.saveTimeSlot(timeSlot5);
+        timeSlotService.saveTimeSlot(timeSlot6);
+        timeSlotService.saveTimeSlot(timeSlot7);
+        timeSlotService.saveTimeSlot(timeSlot8);
+        timeSlotService.saveTimeSlot(timeSlot9);
 
         /*****************************************************************************************
          * CUSTOMERS
@@ -54,10 +65,6 @@ public class BootstrapData implements CommandLineRunner {
 
         Customer customer1 = new Customer("Tobbe","J","kollkarl",address1);
         customerRepository.save(customer1);
-
-        /*****************************************************************************************
-         * VENUE
-         */
 
     }
 }

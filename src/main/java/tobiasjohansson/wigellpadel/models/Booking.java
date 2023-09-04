@@ -14,8 +14,8 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
-    @Column(name = "TOTAL_PRICE")
-    private double totalPrice;
+    @Column(name = "EURO")
+    private double euro;
     @Column(name = "PLAYERS")
 
     private int players;
@@ -28,7 +28,7 @@ public class Booking {
 
     public Booking(int players, Date dateOfBooking, TimeSlot timeSlot) {
         this.bookingId = bookingId;
-        this.totalPrice = totalPrice;
+        this.euro = euro;
         this.players = players;
         this.dateOfBooking = dateOfBooking;
         this.timeSlot = timeSlot;
@@ -46,12 +46,12 @@ public class Booking {
         return bookingId;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double geteuro() {
+        return euro;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void seteuro(double totalPrice) {
+        this.euro = euro;
     }
 
     public int getPlayers() {
