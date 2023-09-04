@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v5/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
     @Autowired
@@ -37,8 +38,8 @@ public class AdminController {
     @DeleteMapping("/deletebooking/{id}")
     public ResponseEntity<String> deleteBooking(@PathVariable("id") long customerId, @RequestBody Map<String,Long> requestBody) {
         long bookingId = requestBody.get("bookingId");
-        customerService.deleteBookingFromCustomer(customerId,bookingId);
-        return new ResponseEntity<String>("Booking was deleted", HttpStatus.OK);
+        String deleteText = customerService.deleteBookingFromCustomer(customerId,bookingId);
+        return new ResponseEntity<String>(deleteText, HttpStatus.OK);
     }
 
     @PutMapping("/updateinfo")

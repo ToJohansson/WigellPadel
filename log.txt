@@ -1,4 +1,2 @@
 
-2023-07-07 07:39:18,886 [INFO] - [Booking Created] customer with id:1, timeslot with id:1
-2023-07-07 08:11:33,930 [INFO] - [Booking Created] customer with id:1, timeslot with id:1
-2023-07-07 08:11:57,558 [INFO] - [Deleted] Booking with id:1, from customer with id:1
+
