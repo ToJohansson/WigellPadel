@@ -1,7 +1,1 @@
 
-2023-09-04 16:25:13,524 [INFO] - [Booking Created] customer with id:1, timeslot with id:1
-2023-09-04 16:25:23,433 [INFO] - [Customer Created] Username: matteGirl
-2023-09-04 16:25:26,039 [INFO] - [Customer Created] Username: b, -- new address added with id:1
-2023-09-04 16:25:29,086 [INFO] - [Time SLot Updated] with id:1
-2023-09-04 16:25:32,377 [INFO] - [Booking Updated] Booking with id:1 was updated
-2023-09-04 16:25:37,069 [INFO] - [Deleted] Booking with id:1, from customer with id:1
