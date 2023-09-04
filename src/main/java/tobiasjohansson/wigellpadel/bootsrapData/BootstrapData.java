@@ -16,11 +16,7 @@ public class BootstrapData implements CommandLineRunner {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private TimeSlotRepository timeSlotRepository;
-
-    @Autowired
     private TimeSlotService timeSlotService;
-
 
     @Override
     public void run(String... args) throws Exception {
@@ -38,15 +34,6 @@ public class BootstrapData implements CommandLineRunner {
         TimeSlot timeSlot8 = new TimeSlot("Bana 3","1200-1300",350,0,true);
         TimeSlot timeSlot9 = new TimeSlot("Bana 3","1400-1500",450,0,true);
 
-//        timeSlotRepository.save(timeSlot1);
-//        timeSlotRepository.save(timeSlot2);
-//        timeSlotRepository.save(timeSlot3);
-//        timeSlotRepository.save(timeSlot4);
-//        timeSlotRepository.save(timeSlot5);
-//        timeSlotRepository.save(timeSlot6);
-//        timeSlotRepository.save(timeSlot7);
-//        timeSlotRepository.save(timeSlot8);
-//        timeSlotRepository.save(timeSlot9);
         timeSlotService.saveTimeSlot(timeSlot1);
         timeSlotService.saveTimeSlot(timeSlot2);
         timeSlotService.saveTimeSlot(timeSlot3);

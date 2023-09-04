@@ -22,11 +22,6 @@ public class CustomerController {
     @Autowired
     private TimeSlotService timeSlotService;
 
-    @GetMapping("/index")
-    public String welcome(){
-        return "";
-    }
-
     @GetMapping("/availability")
     public List<TimeSlot> getAllCourts() {
         return timeSlotService.getCourts();
@@ -34,7 +29,6 @@ public class CustomerController {
 
     @GetMapping("/mybookings/{id}")
     public ResponseEntity<List<Booking>> getMyBookings(@PathVariable("id") long id) {
-
         return ResponseEntity.ok(customerService.getMyBookings(id));
     }
 
