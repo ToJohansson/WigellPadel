@@ -1,10 +1,8 @@
 package tobiasjohansson.wigellpadel.exceptions;
 
-//import jakarta.persistence.EntityExistsException;
+import javax.persistence.EntityExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import javax.persistence.EntityExistsException;
 
 @ResponseStatus(HttpStatus.CONFLICT)
 public class ResourceExsistException extends EntityExistsException {
