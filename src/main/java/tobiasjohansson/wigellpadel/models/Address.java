@@ -1,6 +1,7 @@
 package tobiasjohansson.wigellpadel.models;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ADDRESS")

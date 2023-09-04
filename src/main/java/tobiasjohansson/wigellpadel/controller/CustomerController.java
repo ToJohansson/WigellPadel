@@ -44,7 +44,7 @@ public class CustomerController {
         long customerId = requestBody.get("customerId");
         long players = requestBody.get("players");
 
-        return new ResponseEntity<String>(customerService.saveBooking(timeId, customerId,players), HttpStatus.OK);
+        return new ResponseEntity<String>(customerService.saveBooking(timeId, customerId, players), HttpStatus.OK);
     }
 
 }

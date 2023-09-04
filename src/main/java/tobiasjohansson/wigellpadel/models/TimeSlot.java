@@ -19,6 +19,7 @@ public class TimeSlot {
     public TimeSlot() {
     }
 
+
     public TimeSlot(String courtName, String time,double sek,double euro ,boolean available) {
         this.courtName = courtName;
         this.time = time;
@@ -67,5 +68,7 @@ public class TimeSlot {
 
     public void setEuro(double euro) {
         this.euro = euro;
+
     }
+
 }
